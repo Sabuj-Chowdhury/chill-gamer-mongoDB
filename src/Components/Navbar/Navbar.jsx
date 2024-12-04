@@ -63,14 +63,14 @@ const Navbar = () => {
             Logout
           </NavLink>
           <button onClick={toggleDarkMode} className="text-2xl">
-            {darkMode ? <MdDarkMode /> : <CiLight />}
+            {darkMode ? <CiLight /> : <MdDarkMode />}
           </button>
         </div>
 
         {/* Small Screen Menu Icons */}
         <div className="flex md:hidden items-center space-x-4">
           <button onClick={toggleDarkMode} className="text-2xl">
-            {darkMode ? <MdDarkMode /> : <CiLight />}
+            {darkMode ? <CiLight /> : <MdDarkMode />}
           </button>
           <button onClick={() => setOpen(!open)} className="text-4xl">
             {open ? <AiOutlineClose /> : <AiOutlineMenu />}
@@ -80,7 +80,12 @@ const Navbar = () => {
 
       {/* Collapsible Menu for Small Screens */}
       {open && (
-        <div className="absolute top-16 left-0 w-full bg-black dark:bg-gray-800 z-10 shadow-lg">
+        <div
+          className="absolute top-16 right-5 w-64 bg-black dark:bg-gray-800 z-10 shadow-lg rounded-lg transition-transform duration-300"
+          style={{
+            transform: open ? "translateY(0)" : "translateY(-200%)",
+          }}
+        >
           <div className="flex flex-col items-center py-5 space-y-4">
             <NavLink to="/">Home</NavLink>
             <NavLink to="/add-review">Add Review</NavLink>
