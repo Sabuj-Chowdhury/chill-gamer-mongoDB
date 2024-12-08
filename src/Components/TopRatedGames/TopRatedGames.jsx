@@ -9,12 +9,13 @@ const TopRatedGames = () => {
     const fetchGames = async () => {
       try {
         const response = await fetch("http://localhost:5000/top-rated-games");
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
         const data = await response.json();
-        console.log("Fetched games:", data); // Debugging output
-        setGames(data);
+        console.log("Fetched games:", data); // Inspect this
+        if (data && Array.isArray(data) && data.length) {
+          setGames(data);
+        } else {
+          console.error("No data found from the server.");
+        }
       } catch (error) {
         console.error("Error fetching games:", error);
       }
