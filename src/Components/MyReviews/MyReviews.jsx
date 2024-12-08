@@ -20,7 +20,7 @@ const MyReviews = () => {
           const data = await response.json();
           setReviews(data);
         } catch (error) {
-          console.error("Error fetching user's reviews:", error);
+          toast.error(error);
         }
       }
       setLoading(false);
@@ -52,7 +52,6 @@ const MyReviews = () => {
           toast.error("Failed to delete review");
         }
       } catch (error) {
-        console.error("Error deleting review:", error);
         toast.error("Something went wrong.");
       }
     }
@@ -96,12 +95,16 @@ const MyReviews = () => {
         toast.error("Failed to update review");
       }
     } catch (error) {
-      console.error("Error during review update:", error);
       toast.error("Something went wrong.");
     }
   };
 
-  if (loading) return <div>Loading...</div>;
+  if (loading)
+    return (
+      <div>
+        <span className="loading loading-bars loading-lg"></span>
+      </div>
+    );
 
   return (
     <div className="container mx-auto p-6">

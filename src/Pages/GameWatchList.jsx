@@ -11,7 +11,6 @@ const GameWatchList = () => {
       const fetchWatchlist = async () => {
         try {
           const url = `http://localhost:5000/my-watchlist/${user.email}`;
-          console.log("Fetching watchlist from URL:", url);
 
           const response = await fetch(url);
 
@@ -20,11 +19,9 @@ const GameWatchList = () => {
           }
 
           const data = await response.json();
-          console.log("Fetched watchlist data:", data);
 
           setWatchlist(data);
         } catch (error) {
-          console.error("Failed to fetch watchlist:", error);
           setError("Failed to fetch watchlist.");
         }
       };
@@ -33,7 +30,12 @@ const GameWatchList = () => {
     }
   }, [user]);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading)
+    return (
+      <div>
+        <span className="loading loading-bars loading-lg"></span>
+      </div>
+    );
   if (!user) return <div>Please log in to view your watchlist.</div>;
 
   return (

@@ -10,6 +10,7 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
+import toast from "react-hot-toast";
 
 export const authContext = createContext();
 
@@ -38,15 +39,14 @@ const AuthProvider = ({ route }) => {
   // google
   const handleGoogleLogin = async () => {
     try {
-      // Sign in with popup
       const result = await signInWithPopup(auth, googleProvider);
-      // You can access user information if needed
+
       const user = result.user;
-      console.log("User logged in with Google:", user);
-      return user; // Return user info or simply resolve
+
+      return user;
     } catch (error) {
-      console.error("Google login error:", error);
-      throw error; // Rethrow the error for the calling function to handle
+      toast.error("Google login error:", error);
+      throw error;
     }
   };
 

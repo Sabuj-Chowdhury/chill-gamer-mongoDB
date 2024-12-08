@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import { authContext } from "../../Provider/AuthProvider";
 import Swal from "sweetalert2";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const { handleSignUp } = useContext(authContext);
+  const { handleSignUp, handleLogout } = useContext(authContext);
+  const navigate = useNavigate();
 
-  // Password validation logic
   const isValidPassword = (password) => {
     const hasUpperCase = /[A-Z]/.test(password);
     const hasLowerCase = /[a-z]/.test(password);
@@ -30,10 +30,8 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Directly access values from e.target instead of useState
-    const name = e.target.name.value;
     const email = e.target.email.value;
-    const photoURL = e.target.photoURL.value;
+
     const password = e.target.password.value;
 
     const passwordError = isValidPassword(password);
@@ -55,6 +53,10 @@ const Register = () => {
         showConfirmButton: false,
         timer: 1500,
       });
+
+      // Logout the user and redirect to login
+      await handleLogout();
+      navigate("/login");
     } catch (error) {
       Swal.fire({
         icon: "error",

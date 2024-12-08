@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Tooltip } from "react-tooltip";
 import { Fade } from "react-awesome-reveal";
+import toast from "react-hot-toast";
 
 const AllReviews = () => {
   const [reviews, setReviews] = useState([]);
@@ -9,7 +10,6 @@ const AllReviews = () => {
   const [sortOption, setSortOption] = useState("rating-asc");
   const [filterGenre, setFilterGenre] = useState("All");
 
-  // Fetch reviews
   useEffect(() => {
     const fetchAllReviews = async () => {
       try {
@@ -18,7 +18,7 @@ const AllReviews = () => {
         setReviews(data);
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching reviews:", error);
+        toast.error("Error fetching reviews:", error);
       }
     };
 
@@ -58,7 +58,11 @@ const AllReviews = () => {
   });
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <span className="loading loading-bars loading-lg"></span>
+      </div>
+    );
   }
 
   return (

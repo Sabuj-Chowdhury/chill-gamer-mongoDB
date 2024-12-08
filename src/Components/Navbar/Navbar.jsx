@@ -1,11 +1,12 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../../assets/Logo.jpg";
 import "../Navbar/Navbar.css";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { CiLight } from "react-icons/ci";
 import { MdDarkMode } from "react-icons/md";
 import { authContext } from "../../Provider/AuthProvider";
+import { FaUserCircle } from "react-icons/fa";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -26,10 +27,9 @@ const Navbar = () => {
     }
   };
 
-  // Handle redirection after logout
   const onLogout = async () => {
     await handleLogout();
-    navigate("/"); // Redirect to home page after logging out
+    navigate("/");
   };
 
   return (
@@ -69,17 +69,20 @@ const Navbar = () => {
         {/* Auth Buttons and Dark Mode Toggle */}
         <div className="hidden md:flex items-center space-x-4">
           {user ? (
-            // If user is logged in
             <div className="flex items-center space-x-2">
               {/* Centered User Avatar */}
               <div className="relative group">
-                <img
-                  src={user.photoURL || "https://via.placeholder.com/40"}
-                  alt="User Avatar"
-                  className="w-10 h-10 rounded-full cursor-pointer"
-                />
+                {user.photoURL ? (
+                  <img
+                    src={user.photoURL}
+                    alt="User Avatar"
+                    className="w-10 h-10 rounded-full cursor-pointer"
+                  />
+                ) : (
+                  <FaUserCircle className="w-10 h-10 text-gray-500 cursor-pointer" />
+                )}
                 <div className="absolute left-0 mt-2 hidden group-hover:block bg-black text-white py-1 px-2 rounded-lg shadow-lg">
-                  {user.displayName}
+                  {user.displayName || "Anonymous User"}
                 </div>
               </div>
               {/* Log Out Button */}
@@ -91,7 +94,6 @@ const Navbar = () => {
               </button>
             </div>
           ) : (
-            // If not logged in
             <>
               <NavLink to="/login" className="hover:underline">
                 Login

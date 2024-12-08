@@ -18,12 +18,7 @@ const PrivateRoute = ({ children }) => {
   }
 
   if (!user) {
-    return (
-      <Navigate
-        to="/login"
-        state={{ from: location.pathname }} // Set last location to redirect after login
-      />
-    );
+    return <Navigate to="/login" state={{ from: location.pathname }} />;
   }
 
   return children;

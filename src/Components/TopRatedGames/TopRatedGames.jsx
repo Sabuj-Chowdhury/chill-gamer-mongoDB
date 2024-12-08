@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 const TopRatedGames = () => {
@@ -10,14 +11,12 @@ const TopRatedGames = () => {
       try {
         const response = await fetch("http://localhost:5000/top-rated-games");
         const data = await response.json();
-        console.log("Fetched games:", data); // Inspect this
+
         if (data && Array.isArray(data) && data.length) {
           setGames(data);
-        } else {
-          console.error("No data found from the server.");
         }
       } catch (error) {
-        console.error("Error fetching games:", error);
+        toast.error("Error fetching games:", error);
       }
     };
 

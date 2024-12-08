@@ -17,10 +17,9 @@ const Login = () => {
 
     try {
       await handleLogin(email, password);
-      console.log("Login successful, navigating...");
 
       const from = location.state?.from || "/";
-      console.log("Redirecting to:", from);
+
       navigate(from, { replace: true });
 
       Swal.fire({
@@ -51,10 +50,9 @@ const Login = () => {
     console.log("Location state before Google sign-in:", location.state);
     try {
       await handleGoogleLogin();
-      console.log("Google login successful, navigating...");
 
       const from = location.state?.from || "/";
-      console.log("Redirecting to:", from);
+
       navigate(from, { replace: true });
 
       Swal.fire({

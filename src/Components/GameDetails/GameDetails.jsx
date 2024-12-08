@@ -23,7 +23,6 @@ const GameDetails = () => {
           setError(data.error || "Error fetching data.");
         }
       } catch (error) {
-        console.error("Error fetching review details:", error);
         setError("Failed to fetch review details.");
       }
     };
@@ -57,7 +56,6 @@ const GameDetails = () => {
         toast.error("Something went wrong.");
       }
     } catch (error) {
-      console.error("Error adding to watchlist:", error);
       toast.error("Failed to add to watchlist.");
     }
   };
@@ -69,7 +67,7 @@ const GameDetails = () => {
   if (!reviewDetails) {
     return (
       <div className="text-gray-600 text-center mt-6 font-semibold">
-        Loading...
+        <span className="loading loading-bars loading-lg"></span>
       </div>
     );
   }
