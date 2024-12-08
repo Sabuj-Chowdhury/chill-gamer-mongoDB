@@ -1,14 +1,17 @@
 import { NavLink } from "react-router-dom";
 import logo from "../../assets/Logo.jpg";
 import "../Navbar/Navbar.css";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { CiLight } from "react-icons/ci";
 import { MdDarkMode } from "react-icons/md";
+import { authContext } from "../../Provider/AuthProvider";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
+
+  const { user, handleLogout } = useContext(authContext);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -52,16 +55,32 @@ const Navbar = () => {
           <NavLink to="/game-watchlist" className="hover:underline">
             Game WatchList
           </NavLink>
+          {user && (
+            <NavLink to="/my-reviews" className="hover:underline">
+              My Reviews
+            </NavLink>
+          )}
         </div>
 
         {/* Auth Buttons and Dark Mode Toggle */}
         <div className="hidden md:flex items-center space-x-4">
-          <NavLink to="/login" className="hover:underline">
-            Login
-          </NavLink>
-          <NavLink to="/logout" className="hover:underline">
-            Logout
-          </NavLink>
+          {user ? (
+            <button
+              onClick={handleLogout}
+              className="hover:underline text-red-500"
+            >
+              Logout
+            </button>
+          ) : (
+            <>
+              <NavLink to="/login" className="hover:underline">
+                Login
+              </NavLink>
+              <NavLink to="/register" className="hover:underline">
+                Register
+              </NavLink>
+            </>
+          )}
           <button onClick={toggleDarkMode} className="text-2xl">
             {darkMode ? <CiLight /> : <MdDarkMode />}
           </button>
@@ -91,8 +110,20 @@ const Navbar = () => {
             <NavLink to="/add-review">Add Review</NavLink>
             <NavLink to="/all-reviews">All Reviews</NavLink>
             <NavLink to="/game-watchlist">Game WatchList</NavLink>
-            <NavLink to="/login">Login</NavLink>
-            <NavLink to="/logout">Logout</NavLink>
+            {user && <NavLink to="/my-reviews">My Reviews</NavLink>}
+            {user ? (
+              <button
+                onClick={handleLogout}
+                className="hover:underline text-red-500"
+              >
+                Logout
+              </button>
+            ) : (
+              <>
+                <NavLink to="/login">Login</NavLink>
+                <NavLink to="/register">Register</NavLink>
+              </>
+            )}
           </div>
         </div>
       )}

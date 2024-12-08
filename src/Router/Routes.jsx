@@ -8,6 +8,7 @@ import Login from "../Pages/Login";
 import Register from "../Components/Register/Register";
 import GameDetails from "../Components/GameDetails/GameDetails";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import MyReviews from "../Components/MyReviews/MyReviews";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,14 @@ const router = createBrowserRouter([
       {
         path: "/all-reviews",
         element: <AllReviews></AllReviews>,
+      },
+      {
+        path: "/my-reviews",
+        element: (
+          <PrivateRoute>
+            <MyReviews></MyReviews>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/game-watchlist",
