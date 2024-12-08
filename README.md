@@ -2,7 +2,7 @@
 
 Welcome to **Chill Gamer** - the ultimate platform for discovering and sharing video game reviews. Explore, rate, and save your favorite games to your personalized watchlist with just a few clicks.
 
-🔗 [Live Website URL](https://your-live-site-url.com) _(Replace with your actual live site link)_
+🔗 [Live Website URL](https://chill-gamer-f8131.firebaseapp.com/)
 
 ---
 
