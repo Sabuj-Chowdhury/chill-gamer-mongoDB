@@ -8,6 +8,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 
 export const authContext = createContext();
@@ -19,13 +20,19 @@ const AuthProvider = ({ route }) => {
   const [loading, setLoading] = useState(true);
 
   const handleSignUp = (email, password) => {
-    createUserWithEmailAndPassword(auth, email, password);
+    return createUserWithEmailAndPassword(auth, email, password);
   };
   const handleLogin = (email, password) => {
-    signInWithEmailAndPassword(auth, email, password);
+    return signInWithEmailAndPassword(auth, email, password);
   };
   const handleLogout = () => {
     signOut(auth);
+  };
+  const manageProfile = (name, image) => {
+    return updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: image,
+    });
   };
 
   // google login
@@ -37,7 +44,11 @@ const AuthProvider = ({ route }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       console.log(currentUser);
-      setUser(currentUser);
+      if (currentUser) {
+        setUser(currentUser);
+      } else {
+        setUser(null);
+      }
       setLoading(false);
 
       return () => {
@@ -50,7 +61,9 @@ const AuthProvider = ({ route }) => {
     handleLogin,
     handleLogout,
     handleGoogleLogin,
+    manageProfile,
     user,
+    setUser,
     loading,
   };
   return (

@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { authContext } from "../Provider/AuthProvider";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { FaGoogle, FaUserAlt, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 
@@ -8,6 +8,8 @@ const Login = () => {
   const { handleLogin, handleGoogleLogin } = useContext(authContext);
 
   const [showPassword, setShowPassword] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const handleForm = async (e) => {
     e.preventDefault();
@@ -15,7 +17,9 @@ const Login = () => {
     const password = e.target.password.value;
 
     try {
-      await handleLogin(email, password);
+      await handleLogin(email, password).then((res) => {
+        navigate(location.state.from);
+      });
       Swal.fire({
         icon: "success",
         title: "Login Successful",
@@ -33,7 +37,9 @@ const Login = () => {
 
   const handleGoogleSignIn = async () => {
     try {
-      await handleGoogleLogin();
+      await handleGoogleLogin().then((res) => {
+        navigate(location.state.form);
+      });
       Swal.fire({
         icon: "success",
         title: "Login Successful",
