@@ -21,12 +21,25 @@ const AddReview = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const gameCoverURL = e.target.gameCoverURL.value;
-    const gameTitle = e.target.gameTitle.value;
-    const reviewDescription = e.target.reviewDescription.value;
-    const rating = parseInt(e.target.rating.value, 10);
-    const publishingYear = e.target.publishingYear.value;
-    const genre = e.target.genre.value;
+    const form = e.target;
+    const gameCoverURL = form.gameCoverURL.value;
+    const gameTitle = form.gameTitle.value;
+    const reviewDescription = form.reviewDescription.value;
+    const rating = parseInt(form.rating.value, 10);
+    const publishingYear = form.publishingYear.value;
+    const genre = form.genre.value;
+    const userEmail = user?.email || "";
+    const userName = user?.displayName || "Not Found";
+    const reviewData = {
+      gameCoverURL,
+      gameTitle,
+      reviewDescription,
+      rating,
+      publishingYear,
+      genre,
+      userEmail,
+      userName,
+    };
 
     if (rating < 1 || rating > 10) {
       Swal.fire({
@@ -37,25 +50,35 @@ const AddReview = () => {
       return;
     }
 
-    const reviewData = {
-      gameCoverURL,
-      gameTitle,
-      reviewDescription,
-      rating,
-      publishingYear,
-      genre,
-      userEmail: user?.email || "Not signed in",
-      userName: user?.displayName || "Guest",
-    };
-
-    console.log("Review Submitted:", reviewData);
-
-    Swal.fire({
-      icon: "success",
-      title: "Review Submitted Successfully",
-      showConfirmButton: false,
-      timer: 1500,
-    });
+    try {
+      const response = await fetch("http://localhost:5000/add-review", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(reviewData),
+      });
+      if (response.ok) {
+        Swal.fire({
+          icon: "success",
+          title: "Review Submitted Successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        form.reset();
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Failed to submit review. Please try again.",
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        icon: "error",
+        title: "Server Error",
+        text: "Could not connect to the server.",
+      });
+    }
   };
 
   return (
