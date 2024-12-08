@@ -10,9 +10,6 @@ const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Debugging: Log the location state
-  console.log("Location state:", location.state);
-
   const handleForm = async (e) => {
     e.preventDefault();
     const email = e.target.email.value;
@@ -24,8 +21,6 @@ const Login = () => {
 
       const from = location.state?.from || "/";
       console.log("Redirecting to:", from);
-
-      // Use replace to avoid going back to the login page
       navigate(from, { replace: true });
 
       Swal.fire({
@@ -35,24 +30,32 @@ const Login = () => {
         timer: 1500,
       });
     } catch (error) {
+      let errorMessage = "Login failed. Please try again.";
+      if (error.code === "auth/wrong-password") {
+        errorMessage = "Incorrect password. Please check your password.";
+      } else if (error.code === "auth/user-not-found") {
+        errorMessage = "No account found with this email. Please register.";
+      } else if (error.code === "auth/invalid-email") {
+        errorMessage = "Invalid email format. Please enter a valid email.";
+      }
+
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: error.message,
+        text: errorMessage,
       });
     }
   };
 
   const handleGoogleSignIn = async () => {
-    console.log("Location state before Google sign-in:", location.state); // Debugging
+    console.log("Location state before Google sign-in:", location.state);
     try {
-      await handleGoogleLogin(); // Wait for Google login to complete
+      await handleGoogleLogin();
       console.log("Google login successful, navigating...");
 
-      // Use location.state?.from to get the redirect path
       const from = location.state?.from || "/";
       console.log("Redirecting to:", from);
-      navigate(from, { replace: true }); // Use replace to prevent going back to the login page
+      navigate(from, { replace: true });
 
       Swal.fire({
         icon: "success",
@@ -71,9 +74,7 @@ const Login = () => {
 
   return (
     <div className="relative min-h-screen bg-gray-900 flex items-center justify-center transition duration-300 ease-in-out">
-      {/* Login Card */}
       <div className="bg-gray-800 border border-gray-700 rounded-lg shadow-lg p-8 w-full max-w-sm">
-        {/* Branding Header */}
         <div className="flex justify-center mb-4">
           <div className="text-3xl font-extrabold text-blue-400">
             Chill Gamer
@@ -83,9 +84,7 @@ const Login = () => {
           Login to Your Account
         </h2>
 
-        {/* Login Form */}
         <form onSubmit={handleForm}>
-          {/* Email Input with User Icon */}
           <div className="mb-4 flex items-center bg-gray-700 px-3 py-2 border border-gray-600 rounded-md">
             <FaUserAlt className="text-gray-400 mr-2" />
             <input
@@ -97,7 +96,6 @@ const Login = () => {
             />
           </div>
 
-          {/* Password Input with Lock Icon & Eye Icon */}
           <div className="mb-4 flex items-center bg-gray-700 px-3 py-2 border border-gray-600 rounded-md relative">
             <FaLock className="text-gray-400 mr-2" />
             <input
@@ -107,7 +105,6 @@ const Login = () => {
               placeholder="Enter your password"
               required
             />
-            {/* Eye Icon for toggling */}
             <button
               type="button"
               className="absolute right-2 text-gray-400 focus:outline-none"
@@ -117,7 +114,6 @@ const Login = () => {
             </button>
           </div>
 
-          {/* Login Button */}
           <button
             type="submit"
             className="w-full py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg shadow-md transition focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -126,7 +122,6 @@ const Login = () => {
           </button>
         </form>
 
-        {/* Google Sign-In with Icon */}
         <div className="mt-4">
           <button
             onClick={handleGoogleSignIn}
@@ -137,7 +132,6 @@ const Login = () => {
           </button>
         </div>
 
-        {/* Register Redirect */}
         <p className="text-center mt-6 text-sm text-gray-400">
           Don't have an account?{" "}
           <NavLink
