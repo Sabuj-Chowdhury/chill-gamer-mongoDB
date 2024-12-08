@@ -111,6 +111,7 @@ const Navbar = () => {
             <NavLink to="/all-reviews">All Reviews</NavLink>
             <NavLink to="/game-watchlist">Game WatchList</NavLink>
             {user && <NavLink to="/my-reviews">My Reviews</NavLink>}
+
             {user ? (
               <button
                 onClick={handleLogout}

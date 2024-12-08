@@ -47,9 +47,14 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+
       {
         path: "/game-watchlist",
-        element: <GameWatchList></GameWatchList>,
+        element: (
+          <PrivateRoute>
+            <GameWatchList></GameWatchList>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/login",

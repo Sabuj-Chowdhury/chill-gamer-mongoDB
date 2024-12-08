@@ -9,7 +9,11 @@ const TopRatedGames = () => {
     const fetchGames = async () => {
       try {
         const response = await fetch("http://localhost:5000/top-rated-games");
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
         const data = await response.json();
+        console.log("Fetched games:", data); // Debugging output
         setGames(data);
       } catch (error) {
         console.error("Error fetching games:", error);
