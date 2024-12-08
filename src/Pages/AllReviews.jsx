@@ -13,7 +13,9 @@ const AllReviews = () => {
   useEffect(() => {
     const fetchAllReviews = async () => {
       try {
-        const response = await fetch("http://localhost:5000/all-reviews");
+        const response = await fetch(
+          "https://chill-gamer-server-smoky.vercel.app/all-reviews"
+        );
         const data = await response.json();
         setReviews(data);
         setLoading(false);

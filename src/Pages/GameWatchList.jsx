@@ -10,7 +10,7 @@ const GameWatchList = () => {
     if (user) {
       const fetchWatchlist = async () => {
         try {
-          const url = `http://localhost:5000/my-watchlist/${user.email}`;
+          const url = `https://chill-gamer-server-smoky.vercel.app/my-watchlist/${user.email}`;
 
           const response = await fetch(url);
 

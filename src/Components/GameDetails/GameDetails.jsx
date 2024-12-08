@@ -14,7 +14,9 @@ const GameDetails = () => {
   useEffect(() => {
     const fetchReviewDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/reviews/${id}`);
+        const response = await fetch(
+          `https://chill-gamer-server-smoky.vercel.app/reviews/${id}`
+        );
         const data = await response.json();
 
         if (response.ok) {
@@ -44,11 +46,14 @@ const GameDetails = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:5000/watchlist", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+      const response = await fetch(
+        "https://chill-gamer-server-smoky.vercel.app/watchlist",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
 
       if (response.ok) {
         toast.success("Added to watchlist!");

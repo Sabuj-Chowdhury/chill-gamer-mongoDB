@@ -15,7 +15,7 @@ const MyReviews = () => {
       if (user?.email) {
         try {
           const response = await fetch(
-            `http://localhost:5000/my-reviews/${user.email}`
+            `https://chill-gamer-server-smoky.vercel.app/my-reviews/${user.email}`
           );
           const data = await response.json();
           setReviews(data);
@@ -41,9 +41,12 @@ const MyReviews = () => {
 
     if (confirmDelete) {
       try {
-        const response = await fetch(`http://localhost:5000/reviews/${id}`, {
-          method: "DELETE",
-        });
+        const response = await fetch(
+          `https://chill-gamer-server-smoky.vercel.app/reviews/${id}`,
+          {
+            method: "DELETE",
+          }
+        );
 
         if (response.ok) {
           toast.success("Review deleted successfully");
@@ -70,7 +73,7 @@ const MyReviews = () => {
   const handleUpdate = async () => {
     try {
       const response = await fetch(
-        `http://localhost:5000/reviews/${selectedReview._id}`,
+        `https://chill-gamer-server-smoky.vercel.app/reviews/${selectedReview._id}`,
         {
           method: "PUT",
           headers: {
