@@ -35,9 +35,19 @@ const AuthProvider = ({ route }) => {
     });
   };
 
-  // google login
-  const handleGoogleLogin = () => {
-    signInWithPopup(auth, googleProvider);
+  // google
+  const handleGoogleLogin = async () => {
+    try {
+      // Sign in with popup
+      const result = await signInWithPopup(auth, googleProvider);
+      // You can access user information if needed
+      const user = result.user;
+      console.log("User logged in with Google:", user);
+      return user; // Return user info or simply resolve
+    } catch (error) {
+      console.error("Google login error:", error);
+      throw error; // Rethrow the error for the calling function to handle
+    }
   };
 
   // on Auth state change
@@ -46,6 +56,7 @@ const AuthProvider = ({ route }) => {
       console.log(currentUser);
       if (currentUser) {
         setUser(currentUser);
+        setLoading(false);
       } else {
         setUser(null);
       }

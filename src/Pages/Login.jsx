@@ -6,10 +6,12 @@ import { FaGoogle, FaUserAlt, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
   const { handleLogin, handleGoogleLogin } = useContext(authContext);
-
   const [showPassword, setShowPassword] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+
+  // Debugging: Log the location state
+  console.log("Location state:", location.state);
 
   const handleForm = async (e) => {
     e.preventDefault();
@@ -17,9 +19,15 @@ const Login = () => {
     const password = e.target.password.value;
 
     try {
-      await handleLogin(email, password).then((res) => {
-        navigate(location.state.from);
-      });
+      await handleLogin(email, password);
+      console.log("Login successful, navigating...");
+
+      const from = location.state?.from || "/";
+      console.log("Redirecting to:", from);
+
+      // Use replace to avoid going back to the login page
+      navigate(from, { replace: true });
+
       Swal.fire({
         icon: "success",
         title: "Login Successful",
@@ -36,10 +44,16 @@ const Login = () => {
   };
 
   const handleGoogleSignIn = async () => {
+    console.log("Location state before Google sign-in:", location.state); // Debugging
     try {
-      await handleGoogleLogin().then((res) => {
-        navigate(location.state.form);
-      });
+      await handleGoogleLogin(); // Wait for Google login to complete
+      console.log("Google login successful, navigating...");
+
+      // Use location.state?.from to get the redirect path
+      const from = location.state?.from || "/";
+      console.log("Redirecting to:", from);
+      navigate(from, { replace: true }); // Use replace to prevent going back to the login page
+
       Swal.fire({
         icon: "success",
         title: "Login Successful",

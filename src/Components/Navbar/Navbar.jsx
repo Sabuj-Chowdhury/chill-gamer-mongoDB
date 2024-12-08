@@ -1,7 +1,7 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../../assets/Logo.jpg";
 import "../Navbar/Navbar.css";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { CiLight } from "react-icons/ci";
 import { MdDarkMode } from "react-icons/md";
@@ -10,22 +10,26 @@ import { authContext } from "../../Provider/AuthProvider";
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
-
   const { user, handleLogout } = useContext(authContext);
+  const navigate = useNavigate();
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
     document.documentElement.classList.toggle("dark");
 
     if (darkMode) {
-      // Light mode
       document.body.classList.remove("bg-black", "text-white");
       document.body.classList.add("bg-white", "text-black");
     } else {
-      // Dark mode
       document.body.classList.remove("bg-white", "text-black");
       document.body.classList.add("bg-black", "text-white");
     }
+  };
+
+  // Handle redirection after logout
+  const onLogout = async () => {
+    await handleLogout();
+    navigate("/"); // Redirect to home page after logging out
   };
 
   return (
@@ -65,13 +69,29 @@ const Navbar = () => {
         {/* Auth Buttons and Dark Mode Toggle */}
         <div className="hidden md:flex items-center space-x-4">
           {user ? (
-            <button
-              onClick={handleLogout}
-              className="hover:underline text-red-500"
-            >
-              Logout
-            </button>
+            // If user is logged in
+            <div className="flex items-center space-x-2">
+              {/* Centered User Avatar */}
+              <div className="relative group">
+                <img
+                  src={user.photoURL || "https://via.placeholder.com/40"}
+                  alt="User Avatar"
+                  className="w-10 h-10 rounded-full cursor-pointer"
+                />
+                <div className="absolute left-0 mt-2 hidden group-hover:block bg-black text-white py-1 px-2 rounded-lg shadow-lg">
+                  {user.displayName}
+                </div>
+              </div>
+              {/* Log Out Button */}
+              <button
+                onClick={onLogout}
+                className="hover:underline text-red-500 ml-2"
+              >
+                Log Out
+              </button>
+            </div>
           ) : (
+            // If not logged in
             <>
               <NavLink to="/login" className="hover:underline">
                 Login
@@ -114,10 +134,10 @@ const Navbar = () => {
 
             {user ? (
               <button
-                onClick={handleLogout}
+                onClick={onLogout}
                 className="hover:underline text-red-500"
               >
-                Logout
+                Log Out
               </button>
             ) : (
               <>
