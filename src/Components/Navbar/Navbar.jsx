@@ -33,7 +33,7 @@ const Navbar = () => {
 
   return (
     <div
-      className={`transition-colors duration-300 shadow-md ${
+      className={`transition-colors duration-300 shadow-md sticky top-0 z-10 ${
         darkMode ? "bg-gray-800 text-gray-200" : "bg-white text-black"
       }`}
     >
@@ -194,14 +194,14 @@ const Navbar = () => {
       {/* Collapsible Menu for Small Screens */}
       {open && (
         <div
-          className={`absolute top-16 right-0 w-full h-full bg-opacity-95 ${
+          className={`absolute top-16 right-0 w-full min-h-screen bg-opacity-95 ${
             darkMode ? "bg-gray-900 text-gray-200" : "bg-gray-100 text-black"
           } shadow-lg rounded-lg z-10 transition-transform duration-300`}
         >
           <div className="flex flex-col items-center py-5">
             <NavLink
               to="/"
-              onClick={() => setOpen(false)} // Close the menu on click
+              onClick={() => setOpen(false)}
               className="w-full text-center py-2 hover:bg-amber-500"
             >
               Home
@@ -209,12 +209,29 @@ const Navbar = () => {
             <div className="border-t w-full border-gray-500"></div>
             <NavLink
               to="/all-reviews"
-              onClick={() => setOpen(false)} // Close the menu on click
+              onClick={() => setOpen(false)}
               className="w-full text-center py-2 hover:bg-amber-500"
             >
               All Reviews
             </NavLink>
             <div className="border-t w-full border-gray-500"></div>
+            <NavLink
+              to="/about-us"
+              onClick={() => setOpen(false)}
+              className="w-full text-center py-2 hover:bg-amber-500"
+            >
+              About Us
+            </NavLink>
+            <div className="border-t w-full border-gray-500"></div>
+            <NavLink
+              to="/contact-us"
+              onClick={() => setOpen(false)}
+              className="w-full text-center py-2 hover:bg-amber-500"
+            >
+              Contact Us
+            </NavLink>
+            <div className="border-t w-full border-gray-500"></div>
+
             {user && (
               <>
                 <NavLink
