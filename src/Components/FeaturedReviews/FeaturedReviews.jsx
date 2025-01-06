@@ -36,7 +36,7 @@ const FeaturedReviews = () => {
               >
                 <h3 className="text-lg font-semibold">{review.gameTitle}</h3>
                 <p className="text-sm my-4">{review.reviewDescription}</p>
-                <p className="text-yellow-300">Rating: {review.rating} / 5</p>
+                <p className="text-yellow-300">Rating: {review.rating} / 10</p>
                 <p className="text-sm text-gray-400">- {review.userEmail}</p>
               </div>
             ))}

@@ -5,6 +5,7 @@ import CommunityHighlights from "../Components/CommunityHighlights/CommunityHigh
 import TopRatedGames from "../Components/TopRatedGames/TopRatedGames";
 import UpcomingEvents from "../Components/UpcomingEvents/UpcomingEvents";
 import FeaturedReviews from "../Components/FeaturedReviews/FeaturedReviews";
+import TrendingNews from "../Components/TrendingNews/TrendingNews";
 
 const Home = () => {
   return (
@@ -32,6 +33,11 @@ const Home = () => {
       {/* Featured Reviews */}
       <Fade duration={1000}>
         <FeaturedReviews />
+      </Fade>
+
+      {/* Trending News */}
+      <Fade duration={1000}>
+        <TrendingNews />
       </Fade>
     </div>
   );
