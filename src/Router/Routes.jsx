@@ -29,11 +29,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/details/:id",
-        element: (
-          <PrivateRoute>
-            <GameDetails></GameDetails>
-          </PrivateRoute>
-        ),
+        element: <GameDetails></GameDetails>,
       },
       {
         path: "/all-reviews",

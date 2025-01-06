@@ -26,7 +26,7 @@ const CommunityHighlights = () => {
   };
 
   return (
-    <section className="bg-gray-900 text-gray-100 py-16">
+    <section className="text-amber-400 py-16">
       <div className="max-w-7xl mx-auto px-6">
         <motion.h2
           className="text-4xl font-bold text-center mb-8"

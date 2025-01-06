@@ -2,6 +2,8 @@ import { useEffect, useState, useContext } from "react";
 import toast from "react-hot-toast";
 import { authContext } from "../../Provider/AuthProvider";
 import Swal from "sweetalert2";
+import { MdSystemUpdateAlt } from "react-icons/md";
+import { AiTwotoneDelete } from "react-icons/ai";
 
 const MyReviews = () => {
   const { user } = useContext(authContext);
@@ -102,16 +104,19 @@ const MyReviews = () => {
     }
   };
 
-  if (loading)
+  if (loading) {
     return (
-      <div>
+      <div className="flex justify-center items-center min-h-screen">
         <span className="loading loading-bars loading-lg"></span>
       </div>
     );
+  }
 
   return (
     <div className="container mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-4">My Reviews</h1>
+      <h1 className="text-4xl font-bold text-center text-amber-500 mb-6">
+        My Reviews
+      </h1>
       {user ? (
         <>
           <table className="table-auto w-full bg-white shadow-md rounded-md">
@@ -128,25 +133,33 @@ const MyReviews = () => {
               {reviews.length > 0 ? (
                 reviews.map((review) => (
                   <tr key={review._id} className="text-center">
-                    <td className="border px-4 py-2">{review.gameTitle}</td>
+                    <td className="border px-4 py-2 text-black">
+                      {review.gameTitle}
+                    </td>
                     <td className="border px-4 py-2 text-sm text-gray-700">
                       {review.reviewDescription}
                     </td>
-                    <td className="border px-4 py-2">{review.genre}</td>
-                    <td className="border px-4 py-2">{review.rating}</td>
+                    <td className="border px-4 py-2 text-black">
+                      {review.genre}
+                    </td>
+                    <td className="border px-4 py-2 text-black">
+                      {review.rating}
+                    </td>
                     <td className="border px-4 py-2">
-                      <button
-                        onClick={() => handleOpenModal(review)}
-                        className="px-2 py-1 bg-blue-500 text-white hover:bg-blue-600 rounded"
-                      >
-                        Update
-                      </button>
-                      <button
-                        onClick={() => handleDelete(review._id)}
-                        className="ml-2 px-2 py-1 bg-red-500 text-white hover:bg-red-600 rounded"
-                      >
-                        Delete
-                      </button>
+                      <div className=" flex space-x-5">
+                        <button
+                          onClick={() => handleOpenModal(review)}
+                          className="px-2 py-1 bg-blue-500 text-white hover:bg-blue-600 rounded"
+                        >
+                          <MdSystemUpdateAlt />
+                        </button>
+                        <button
+                          onClick={() => handleDelete(review._id)}
+                          className="ml-2 px-2 py-1 bg-red-500 text-white hover:bg-red-600 rounded"
+                        >
+                          <AiTwotoneDelete />
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))
@@ -166,7 +179,7 @@ const MyReviews = () => {
           {/* Modal for Editing Review */}
           {isModalOpen && (
             <div className="fixed inset-0 bg-gray-700 bg-opacity-50 flex items-center justify-center">
-              <div className="bg-white p-6 rounded-lg shadow-md w-96">
+              <div className="bg-white p-6 rounded-lg shadow-md w-96 text-black">
                 <h2 className="text-xl font-bold mb-2">Update Your Review</h2>
                 <label className="block mb-2">Review Description:</label>
                 <input

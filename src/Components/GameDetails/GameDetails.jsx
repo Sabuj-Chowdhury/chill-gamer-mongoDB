@@ -121,8 +121,8 @@ const GameDetails = () => {
           <div className="mt-6">
             <button
               onClick={handleAddToWatchList}
-              className={`px-6 py-3 w-full md:w-auto bg-blue-500 text-white font-semibold rounded-lg shadow-lg transform transition-transform hover:scale-105 ${
-                user ? "hover:bg-blue-600" : "opacity-50 cursor-not-allowed"
+              className={`px-6 py-3 w-full md:w-auto  bg-amber-500 text-black font-semibold rounded-lg hover:bg-amber-600  shadow-lg transform transition-transform hover:scale-105 ${
+                user ? "hover:bg-amber-600" : "opacity-50 cursor-not-allowed"
               }`}
               disabled={!user}
             >

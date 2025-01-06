@@ -26,28 +26,29 @@ const TopRatedGames = () => {
   }, []);
 
   return (
-    <div className="bg-gray-900 min-h-screen p-6 py-6">
-      <h1 className="text-4xl font-bold text-center text-white mb-8">
+    <div className="min-h-screen p-6 py-6 text-gray-100">
+      <h1 className="text-4xl font-bold text-center text-amber-400 mb-8">
         Top Rated Games
       </h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {games.map((game) => (
           <div
             key={game._id}
-            className="bg-gray-800 border border-gray-700 rounded-lg shadow-lg p-4"
+            className="bg-gray-800 border border-gray-700 rounded-lg shadow-lg p-4 transition-transform transform hover:scale-105"
+            style={{ height: "350px", width: "100%" }}
           >
             <img
               src={game.gameCoverURL}
               alt={game.gameTitle}
               className="w-full h-40 object-cover rounded"
             />
-            <h2 className="text-xl font-bold text-gray-100 mt-4">
+            <h2 className="text-xl font-bold text-gray-100 mt-4 truncate">
               {game.gameTitle}
             </h2>
-            <p className="text-gray-400 mt-2">Genre: {game.genre}</p>
+            <p className="text-gray-400 mt-2 truncate">Genre: {game.genre}</p>
             <p className="text-gray-400">Rating: {game.rating}/10</p>
             <button
-              className="mt-4 py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700"
+              className="mt-4 py-2 px-4 bg-amber-500 text-black font-semibold rounded-lg hover:bg-amber-600 transition-colors"
               onClick={() => navigate(`/details/${game._id}`)}
             >
               Explore Details

@@ -1,6 +1,5 @@
-import { NavLink, useNavigate } from "react-router-dom";
-import logo from "../../assets/Logo.jpg";
-import "../Navbar/Navbar.css";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+
 import { useState, useContext } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { CiLight } from "react-icons/ci";
@@ -35,34 +34,85 @@ const Navbar = () => {
   return (
     <div
       className={`transition-colors duration-300 shadow-md ${
-        darkMode ? "bg-gray-800 text-gray-200" : "bg-black text-emerald-400"
+        darkMode ? "bg-gray-800 text-gray-200" : "bg-white text-black"
       }`}
     >
       {/* Navbar Header */}
       <div className="flex justify-between items-center px-5 py-4 max-w-7xl mx-auto">
         {/* Logo */}
         <div>
-          <img src={logo} className="h-16 w-20" alt="logo" />
+          <Link to="/">
+            <p className={`font-bold text-3xl`}>Chill Gamer</p>
+          </Link>
         </div>
 
         {/* Large Screen Links */}
         <div className="hidden md:flex items-center justify-center space-x-5 flex-1">
-          <NavLink to="/" className="hover:underline">
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              `transition-all px-3 py-2 rounded-md ${
+                isActive
+                  ? "bg-amber-500 text-black font-semibold"
+                  : "hover:text-amber-400"
+              }`
+            }
+          >
             Home
           </NavLink>
-          <NavLink to="/add-review" className="hover:underline">
-            Add Review
-          </NavLink>
-          <NavLink to="/all-reviews" className="hover:underline">
+          <NavLink
+            to="/all-reviews"
+            className={({ isActive }) =>
+              `transition-all px-3 py-2 rounded-md ${
+                isActive
+                  ? "bg-amber-500 text-black font-semibold"
+                  : "hover:text-amber-400"
+              }`
+            }
+          >
             All Reviews
           </NavLink>
-          <NavLink to="/game-watchlist" className="hover:underline">
-            Game WatchList
-          </NavLink>
+
           {user && (
-            <NavLink to="/my-reviews" className="hover:underline">
-              My Reviews
-            </NavLink>
+            <>
+              <NavLink
+                to="/my-reviews"
+                className={({ isActive }) =>
+                  `transition-all px-3 py-2 rounded-md ${
+                    isActive
+                      ? "bg-amber-500 text-black font-semibold"
+                      : "hover:text-amber-400"
+                  }`
+                }
+              >
+                My Reviews
+              </NavLink>
+              <NavLink
+                to="/add-review"
+                className={({ isActive }) =>
+                  `transition-all px-3 py-2 rounded-md ${
+                    isActive
+                      ? "bg-amber-500 text-black font-semibold"
+                      : "hover:text-amber-400"
+                  }`
+                }
+              >
+                Add Review
+              </NavLink>
+
+              <NavLink
+                to="/game-watchlist"
+                className={({ isActive }) =>
+                  `transition-all px-3 py-2 rounded-md ${
+                    isActive
+                      ? "bg-amber-500 text-black font-semibold"
+                      : "hover:text-amber-400"
+                  }`
+                }
+              >
+                Game WatchList
+              </NavLink>
+            </>
           )}
         </div>
 
@@ -70,7 +120,6 @@ const Navbar = () => {
         <div className="hidden md:flex items-center space-x-4">
           {user ? (
             <div className="flex items-center space-x-2">
-              {/* Centered User Avatar */}
               <div className="relative group">
                 {user.photoURL ? (
                   <img
@@ -85,7 +134,6 @@ const Navbar = () => {
                   {user.displayName || "Anonymous User"}
                 </div>
               </div>
-              {/* Log Out Button */}
               <button
                 onClick={onLogout}
                 className="hover:underline text-red-500 ml-2"
@@ -122,29 +170,82 @@ const Navbar = () => {
       {/* Collapsible Menu for Small Screens */}
       {open && (
         <div
-          className="absolute top-16 right-5 w-64 bg-black dark:bg-gray-800 z-10 shadow-lg rounded-lg transition-transform duration-300"
-          style={{
-            transform: open ? "translateY(0)" : "translateY(-200%)",
-          }}
+          className={`absolute top-16 right-0 w-full h-full bg-opacity-95 ${
+            darkMode ? "bg-gray-900 text-gray-200" : "bg-gray-100 text-black"
+          } shadow-lg rounded-lg z-10 transition-transform duration-300`}
         >
-          <div className="flex flex-col items-center py-5 space-y-4">
-            <NavLink to="/">Home</NavLink>
-            <NavLink to="/add-review">Add Review</NavLink>
-            <NavLink to="/all-reviews">All Reviews</NavLink>
-            <NavLink to="/game-watchlist">Game WatchList</NavLink>
-            {user && <NavLink to="/my-reviews">My Reviews</NavLink>}
-
+          <div className="flex flex-col items-center py-5">
+            <NavLink
+              to="/"
+              onClick={() => setOpen(false)} // Close the menu on click
+              className="w-full text-center py-2 hover:bg-amber-500"
+            >
+              Home
+            </NavLink>
+            <div className="border-t w-full border-gray-500"></div>
+            <NavLink
+              to="/all-reviews"
+              onClick={() => setOpen(false)} // Close the menu on click
+              className="w-full text-center py-2 hover:bg-amber-500"
+            >
+              All Reviews
+            </NavLink>
+            <div className="border-t w-full border-gray-500"></div>
+            {user && (
+              <>
+                <NavLink
+                  to="/my-reviews"
+                  onClick={() => setOpen(false)}
+                  className="w-full text-center py-2 hover:bg-amber-500"
+                >
+                  My Reviews
+                </NavLink>
+                <div className="border-t w-full border-gray-500"></div>
+                <NavLink
+                  to="/add-review"
+                  onClick={() => setOpen(false)}
+                  className="w-full text-center py-2 hover:bg-amber-500"
+                >
+                  Add Review
+                </NavLink>
+                <div className="border-t w-full border-gray-500"></div>
+                <NavLink
+                  to="/game-watchlist"
+                  onClick={() => setOpen(false)}
+                  className="w-full text-center py-2 hover:bg-amber-500"
+                >
+                  Game WatchList
+                </NavLink>
+                <div className="border-t w-full border-gray-500"></div>
+              </>
+            )}
             {user ? (
               <button
-                onClick={onLogout}
-                className="hover:underline text-red-500"
+                onClick={() => {
+                  onLogout();
+                  setOpen(false);
+                }}
+                className="w-full text-center py-2 text-red-500 hover:bg-red-600 hover:text-white"
               >
                 Log Out
               </button>
             ) : (
               <>
-                <NavLink to="/login">Login</NavLink>
-                <NavLink to="/register">Register</NavLink>
+                <NavLink
+                  to="/login"
+                  onClick={() => setOpen(false)}
+                  className="w-full text-center py-2 hover:bg-amber-500"
+                >
+                  Login
+                </NavLink>
+                <div className="border-t w-full border-gray-500"></div>
+                <NavLink
+                  to="/register"
+                  onClick={() => setOpen(false)}
+                  className="w-full text-center py-2 hover:bg-amber-500"
+                >
+                  Register
+                </NavLink>
               </>
             )}
           </div>

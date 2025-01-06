@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import Swal from "sweetalert2";
 import { authContext } from "../Provider/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 // Spinner component for loading
 const Spinner = () => {
@@ -12,6 +13,7 @@ const Spinner = () => {
 };
 
 const AddReview = () => {
+  const navigate = useNavigate();
   const { user, loading } = useContext(authContext);
   const genres = ["Action", "RPG", "Adventure", "Strategy", "Sports"];
 
@@ -64,6 +66,7 @@ const AddReview = () => {
           timer: 1500,
         });
         form.reset();
+        navigate("/my-reviews");
       } else {
         Swal.fire({
           icon: "error",
@@ -82,7 +85,7 @@ const AddReview = () => {
   };
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-r from-blue-900 via-gray-800 to-black flex items-center justify-center transition duration-300 ease-in-out">
+    <div className="relative min-h-screen  flex items-center justify-center transition duration-300 ease-in-out">
       <div className="bg-gray-800 border border-gray-700 rounded-lg shadow-lg p-8 w-full max-w-lg transition-transform transform hover:scale-105">
         <h2 className="text-3xl font-bold text-center mb-6 text-gray-100 shadow-md">
           🎮 Submit Your Game Review
@@ -186,7 +189,7 @@ const AddReview = () => {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md transition focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full py-2 px-4 bg-amber-500 text-black font-semibold rounded-lg hover:bg-amber-600  shadow-md transition focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             Submit Review 🏆
           </button>

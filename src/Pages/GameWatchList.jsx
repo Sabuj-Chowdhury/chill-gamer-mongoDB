@@ -36,15 +36,16 @@ const GameWatchList = () => {
         <span className="loading loading-bars loading-lg"></span>
       </div>
     );
-  if (!user) return <div>Please log in to view your watchlist.</div>;
 
   return (
     <div className="container mx-auto my-10">
-      <h1 className="text-2xl font-bold mb-5">My Watchlist</h1>
+      <h1 className="text-4xl font-bold text-center text-amber-400 mb-8">
+        My WatchList
+      </h1>
       {error && <p className="text-red-500">{error}</p>}
       <table className="table-auto w-full border-collapse border border-gray-200">
         <thead>
-          <tr className="bg-gray-100">
+          <tr className="bg-gray-800 text-white">
             <th className="border border-gray-200 px-4 py-2">Game Title</th>
             <th className="border border-gray-200 px-4 py-2">Genre</th>
             <th className="border border-gray-200 px-4 py-2">Rating</th>

@@ -24,8 +24,8 @@ const events = [
 
 const UpcomingEvents = () => {
   return (
-    <div className="py-8 bg-gray-800 text-gray-200">
-      <h2 className="text-center text-2xl text-blue-400 font-bold mb-4">
+    <div className="py-8  text-amber-400">
+      <h2 className="text-center text-4xl text-amber-400 font-bold mb-4">
         Upcoming Events
       </h2>
       <div className="max-w-6xl mx-auto px-4">
