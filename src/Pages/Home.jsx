@@ -4,6 +4,7 @@ import Banner from "../Components/Banner/Banner";
 import CommunityHighlights from "../Components/CommunityHighlights/CommunityHighlights";
 import TopRatedGames from "../Components/TopRatedGames/TopRatedGames";
 import UpcomingEvents from "../Components/UpcomingEvents/UpcomingEvents";
+import FeaturedReviews from "../Components/FeaturedReviews/FeaturedReviews";
 
 const Home = () => {
   return (
@@ -26,6 +27,11 @@ const Home = () => {
       {/* Upcoming Events */}
       <Fade duration={1000}>
         <UpcomingEvents />
+      </Fade>
+
+      {/* Featured Reviews */}
+      <Fade duration={1000}>
+        <FeaturedReviews />
       </Fade>
     </div>
   );
