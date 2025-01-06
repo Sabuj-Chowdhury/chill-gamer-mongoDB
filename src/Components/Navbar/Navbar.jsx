@@ -72,6 +72,18 @@ const Navbar = () => {
           >
             All Reviews
           </NavLink>
+          <NavLink
+            to="/about-us"
+            className={({ isActive }) =>
+              `transition-all px-3 py-2 rounded-md ${
+                isActive
+                  ? "bg-amber-500 text-black font-semibold"
+                  : "hover:text-amber-400"
+              }`
+            }
+          >
+            About Us
+          </NavLink>
 
           {user && (
             <>

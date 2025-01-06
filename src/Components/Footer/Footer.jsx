@@ -15,10 +15,10 @@ const Footer = () => {
         </div>
 
         {/* Social Links */}
-        <div className="flex justify-center space-x-6">
+        <div className="flex justify-center space-x-6 text-amber-400">
           <a
             href="https://www.facebook.com/sc2706r/"
-            className="text-3xl hover:text-emerald-400"
+            className="text-3xl  hover:text-emerald-400"
           >
             <AiFillFacebook />
           </a>

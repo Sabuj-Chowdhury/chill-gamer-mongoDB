@@ -9,6 +9,7 @@ import Register from "../Components/Register/Register";
 import GameDetails from "../Components/GameDetails/GameDetails";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import MyReviews from "../Components/MyReviews/MyReviews";
+import AboutUs from "../Components/AboutUs/AboutUs";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: "/all-reviews",
         element: <AllReviews></AllReviews>,
+      },
+      {
+        path: "/about-us",
+        element: <AboutUs></AboutUs>,
       },
       {
         path: "/my-reviews",
