@@ -84,6 +84,18 @@ const Navbar = () => {
           >
             About Us
           </NavLink>
+          <NavLink
+            to="/contact-us"
+            className={({ isActive }) =>
+              `transition-all px-3 py-2 rounded-md ${
+                isActive
+                  ? "bg-amber-500 text-black font-semibold"
+                  : "hover:text-amber-400"
+              }`
+            }
+          >
+            Contact Us
+          </NavLink>
 
           {user && (
             <>
