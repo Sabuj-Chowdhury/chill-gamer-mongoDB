@@ -10,7 +10,7 @@ const TopRatedGames = () => {
     const fetchGames = async () => {
       try {
         const response = await fetch(
-          "https://chill-gamer-server-smoky.vercel.app/top-rated-games"
+          `${import.meta.env.VITE_url}/top-rated-games`
         );
         const data = await response.json();
 

@@ -51,14 +51,11 @@ const AddReview = () => {
     }
 
     try {
-      const response = await fetch(
-        "https://chill-gamer-server-smoky.vercel.app/add-review",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(reviewData),
-        }
-      );
+      const response = await fetch(`${import.meta.env.VITE_url}/add-review`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(reviewData),
+      });
       if (response.ok) {
         Swal.fire({
           icon: "success",
