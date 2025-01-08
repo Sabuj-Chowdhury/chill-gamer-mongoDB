@@ -10,15 +10,15 @@ Welcome to **Chill Gamer**, the ultimate platform for discovering and sharing vi
 
 ### **Home Page**
 
-![Home Page Screenshot](./src/assets/screenshots/Screenshot%202025-01-08%20at%2015.12.44.png)
+![Home Page Screenshot](./src/assets/scernshots/Screenshot%202025-01-08%20at%2015.12.44.png)
 
-### **Game Details Page**
+### **All Review Page**
 
-![Game Details Screenshot](./src/assets/screenshots/Screenshot%202025-01-08%20at%2015.13.03.png)
+![Game Details Screenshot](./src/assets/scernshots/Screenshot%202025-01-08%20at%2015.13.03.png)
 
 ### **Watchlist Page**
 
-![Watchlist Screenshot](./src/assets/screenshots/Screenshot%202025-01-08%20at%2015.13.43.png)
+![Watchlist Screenshot](./src/assets/scernshots/Screenshot%202025-01-08%20at%2015.13.43.png)
 
 ---
 
